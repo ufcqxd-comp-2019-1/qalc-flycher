@@ -136,6 +136,8 @@ public class QALC {
                 }
                 // TODO Verificar e executar demais fases
 
+                // TODO Retornar código de erro correspondente às falhas que ocorrerem, via `System.exit(...)`;
+
                 // <----
             }
         } catch (CommandLine.UnmatchedArgumentException ex) {
