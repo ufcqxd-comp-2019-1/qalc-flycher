@@ -62,9 +62,12 @@ public class Scanner {
                 lexema.append(source.getCurrentChar());
                 source.advance();
 
-                while (Character.isDigit(source.getCurrentChar())) {
-                    lexema.append(source.getCurrentChar());
-                    source.advance();
+
+                if(Character.isDigit(source.getCurrentChar())) {
+                    do {
+                        lexema.append(source.getCurrentChar());
+                        source.advance();
+                    } while (Character.isDigit(source.getCurrentChar()));
                 }
             }
 
@@ -123,7 +126,7 @@ public class Scanner {
                 return new ResultIdentifierToken(currentLine, lexemeStart, stringValue);
 
             }
-        } else if(OperatorToken.isOperator(source.getCurrentChar())) {
+        } else if(OperatorToken.isOperator(source.getCurrentChar())) { // OperatorToken
             StringBuilder lexema = new StringBuilder();
 
             long currentLine = source.getCurrentLine();
@@ -133,7 +136,7 @@ public class Scanner {
 
             return new OperatorToken(currentLine, lexemeStart, stringValue);
 
-        } else if(DelimiterToken.isDelimiter(source.getCurrentChar())) {
+        } else if(DelimiterToken.isDelimiter(source.getCurrentChar())) { // DelimiterToken
             StringBuilder lexema = new StringBuilder();
 
             long currentLine = source.getCurrentLine();
@@ -143,7 +146,7 @@ public class Scanner {
 
             return new DelimiterToken(currentLine, lexemeStart, stringValue);
 
-        } else if(SpecialToken.isSpecial(source.getCurrentChar())) {
+        } else if(SpecialToken.isSpecial(source.getCurrentChar())) { // SpecialToken
             StringBuilder lexema = new StringBuilder();
 
             long currentLine = source.getCurrentLine();
@@ -153,7 +156,7 @@ public class Scanner {
 
             return new SpecialToken(currentLine, lexemeStart, stringValue);
 
-        } else if(Character.isWhitespace(source.getCurrentChar())) {
+        } else if(Character.isWhitespace(source.getCurrentChar())) { // WhitespaceToken
             StringBuilder lexema = new StringBuilder();
 
             long currentLine = source.getCurrentLine();
@@ -168,7 +171,7 @@ public class Scanner {
 
             return new WhitespaceToken(currentLine, lexemeStart, stringValue);
 
-        } else if(CommentToken.isComment(source.getCurrentChar())) {
+        } else if(CommentToken.isComment(source.getCurrentChar())) { // CommentToken
             StringBuilder lexema = new StringBuilder();
 
             long currentLine = source.getCurrentLine();
