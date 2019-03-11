@@ -189,6 +189,8 @@ public class QALC {
         } catch (Exception ex) {
             System.err.println("Não foi possível executar a ação solicitada.");
             ex.printStackTrace();
+        } finally {
+            ResourcesManager.shutdown(true);
         }
     }
 }
