@@ -1,3 +1,5 @@
+#comentario
 $x = @sqrt(2);
+#comentario
 $y = @log(1024, 2);
-1 - 2
+#comentario

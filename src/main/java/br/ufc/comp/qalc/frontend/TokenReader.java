@@ -221,7 +221,7 @@ public class TokenReader {
         do {
             lexema.append(source.getCurrentChar());
             source.advance();
-        } while (source.getCurrentChar() != '\n' && source.getCurrentChar() != '\r');
+        } while (source.getCurrentChar() != '\n' && source.getCurrentChar() != '\r' && source.getCurrentChar() != '\0');
 
         String stringValue = lexema.toString();
 
