@@ -50,19 +50,32 @@ public class TokensReporter extends BasicReporter {
     public void consume(Message message) {
         if (message instanceof NewTokenMessage) {
             try {
-                if(verbosity == OutputVerbosity.ESSENTIAL)
+                if(verbosity == OutputVerbosity.ESSENTIAL) {
                     output.write(String.format("(%s)\n", ((NewTokenMessage) message).getToken().getTokenIdentifier()));
-                else if(verbosity == OutputVerbosity.ADDITIONAL_INFO)
+                    System.out.print(String.format("(%s)\n", ((NewTokenMessage) message).getToken().getTokenIdentifier()));
+                }
+                else if(verbosity == OutputVerbosity.ADDITIONAL_INFO) {
                     output.write(String.format("(%s, %s)\n",
                             ((NewTokenMessage) message).getToken().getTokenIdentifier(),
                             ((NewTokenMessage) message).getToken().toString()));
-                else if(verbosity == OutputVerbosity.EVERYTHING)
+                    System.out.print(String.format("(%s, %s)\n",
+                            ((NewTokenMessage) message).getToken().getTokenIdentifier(),
+                            ((NewTokenMessage) message).getToken().toString()));
+                }
+                else if(verbosity == OutputVerbosity.EVERYTHING) {
                     output.write(String.format("(%s, %s, L: %d, C: %d-%d)\n",
                             ((NewTokenMessage) message).getToken().getTokenIdentifier(),
                             ((NewTokenMessage) message).getToken().toString(),
                             ((NewTokenMessage) message).getToken().getLineNumber(),
                             ((NewTokenMessage) message).getToken().getColumnStart(),
                             ((NewTokenMessage) message).getToken().getColumnEnd()));
+                    System.out.print(String.format("(%s, %s, L: %d, C: %d-%d)\n",
+                            ((NewTokenMessage) message).getToken().getTokenIdentifier(),
+                            ((NewTokenMessage) message).getToken().toString(),
+                            ((NewTokenMessage) message).getToken().getLineNumber(),
+                            ((NewTokenMessage) message).getToken().getColumnStart(),
+                            ((NewTokenMessage) message).getToken().getColumnEnd()));
+                }
                 //TODO como pegar o lexema.
             } catch (IOException e) {
                 reportFailure(e);
