@@ -7,12 +7,13 @@ import java.io.IOException;
 public class TokenReader {
     public boolean validToken(char value) {
         return (
-                !Character.isDigit(value)
-                        && this.isOperator(value)
-                        && this.isDelimiter(value)
-                        && this.isSpecial(value)
-                        && !Character.isWhitespace(value)
-                        && this.isComment(value)
+                Character.isDigit(value)
+                || this.isOperator(value)
+                || this.isDelimiter(value)
+                || this.isSpecial(value)
+                || this.isComment(value)
+                || value == '$'
+                || value == '@'
         );
     }
 
@@ -236,12 +237,11 @@ public class TokenReader {
         do {
             lexema.append(source.getCurrentChar());
             source.advance();
-        } while (this.validToken(source.getCurrentChar()));
+        } while (!this.validToken(source.getCurrentChar()));
 
         String stringValue = lexema.toString();
 
         return new ErrorToken(currentLine, lexemeStart, stringValue);
-
     }
 
 }

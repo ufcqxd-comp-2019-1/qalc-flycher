@@ -9,4 +9,6 @@
 (RESID, $111, L: 4, C: 2-5)
 (FUNCID, @aaa, L: 4, C: 6-9)
 (VARID, $a, L: 4, C: 12-13)
-(%EOF%, , L: 5, C: 0-0)
+(ERROR, aaaa, L: 5, C: 1-4)
+(RESID, $1, L: 5, C: 6-7)
+(%EOF%, , L: 6, C: 0-0)
