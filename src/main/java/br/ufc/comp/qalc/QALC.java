@@ -2,7 +2,9 @@ package br.ufc.comp.qalc;
 
 import br.ufc.comp.qalc.frontend.Scanner;
 import br.ufc.comp.qalc.frontend.Source;
+import br.ufc.comp.qalc.frontend.token.CommentToken;
 import br.ufc.comp.qalc.frontend.token.EOFToken;
+import br.ufc.comp.qalc.frontend.token.WhitespaceToken;
 import br.ufc.comp.qalc.report.MessageCenter;
 import br.ufc.comp.qalc.report.TokensReporter;
 import br.ufc.comp.qalc.report.messages.Message;
@@ -120,12 +122,15 @@ public class QALC {
                         NewTokenMessage token;
 
                         while(true){
-                             token = new NewTokenMessage(scan.getNextToken());
+                            token = new NewTokenMessage(scan.getNextToken());
 
-                            if(token.getToken() == null)
-                                break;
+                            if(token.getToken() instanceof WhitespaceToken || token.getToken() instanceof CommentToken)
+                                continue;
 
                             MessageCenter.deliver(token);
+
+                            if(token.getToken() instanceof EOFToken)
+                                break;
 
                         }
                         break;

@@ -23,13 +23,6 @@ public class CommentToken extends Token {
     }
 
     /**
-     * Determina se o caractere na source e o comeco de um comentario
-     */
-    public static boolean isComment(char value) {
-        return (value == '#');
-    }
-
-    /**
      * Obtém o comentario.
      *
      * @return Comentario armazenado no token.
