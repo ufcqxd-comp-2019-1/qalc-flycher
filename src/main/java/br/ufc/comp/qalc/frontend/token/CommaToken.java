@@ -23,6 +23,8 @@ public class CommaToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "COMMA"; }
+    public String getTokenIdentifier() {
+        return "COMMA";
+    }
 
 }

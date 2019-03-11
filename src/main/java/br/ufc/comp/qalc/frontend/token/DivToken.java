@@ -22,6 +22,8 @@ public class DivToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "DIV"; }
+    public String getTokenIdentifier() {
+        return "DIV";
+    }
 
 }

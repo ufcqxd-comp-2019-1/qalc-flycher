@@ -22,6 +22,8 @@ public class TimesToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "TIMES"; }
+    public String getTokenIdentifier() {
+        return "TIMES";
+    }
 
 }

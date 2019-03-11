@@ -51,15 +51,13 @@ public class TokensReporter extends BasicReporter {
         if (message instanceof NewTokenMessage) {
             try {
 
-                if(verbosity == OutputVerbosity.ESSENTIAL) {
+                if (verbosity == OutputVerbosity.ESSENTIAL) {
                     output.write(String.format("(%s)\n", ((NewTokenMessage) message).getToken().getTokenIdentifier()));
-                }
-                else if(verbosity == OutputVerbosity.ADDITIONAL_INFO) {
+                } else if (verbosity == OutputVerbosity.ADDITIONAL_INFO) {
                     output.write(String.format("(%s, %s)\n",
                             ((NewTokenMessage) message).getToken().getTokenIdentifier(),
                             ((NewTokenMessage) message).getToken().toString()));
-                }
-                else if(verbosity == OutputVerbosity.EVERYTHING) {
+                } else if (verbosity == OutputVerbosity.EVERYTHING) {
                     output.write(String.format("(%s, %s, L: %d, C: %d-%d)\n",
                             ((NewTokenMessage) message).getToken().getTokenIdentifier(),
                             ((NewTokenMessage) message).getToken().toString(),

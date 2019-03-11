@@ -23,6 +23,8 @@ public class SemiToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "SEMI"; }
+    public String getTokenIdentifier() {
+        return "SEMI";
+    }
 
 }

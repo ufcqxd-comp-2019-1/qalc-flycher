@@ -22,6 +22,8 @@ public class ModToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "MOD"; }
+    public String getTokenIdentifier() {
+        return "MOD";
+    }
 
 }

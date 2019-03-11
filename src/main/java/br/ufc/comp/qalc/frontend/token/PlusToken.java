@@ -22,6 +22,8 @@ public class PlusToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "PLUS"; }
+    public String getTokenIdentifier() {
+        return "PLUS";
+    }
 
 }

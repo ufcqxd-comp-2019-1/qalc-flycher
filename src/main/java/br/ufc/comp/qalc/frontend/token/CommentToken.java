@@ -34,6 +34,8 @@ public class CommentToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "COMMENT"; }
+    public String getTokenIdentifier() {
+        return "COMMENT";
+    }
 
 }

@@ -22,6 +22,8 @@ public class PowToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "POW"; }
+    public String getTokenIdentifier() {
+        return "POW";
+    }
 
 }

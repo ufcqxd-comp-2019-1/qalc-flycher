@@ -22,6 +22,8 @@ public class WhitespaceToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "WHITE"; }
+    public String getTokenIdentifier() {
+        return "WHITE";
+    }
 
 }

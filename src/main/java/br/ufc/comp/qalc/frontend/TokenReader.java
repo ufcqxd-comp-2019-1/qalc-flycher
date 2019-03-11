@@ -8,12 +8,13 @@ public class TokenReader {
     public boolean validToken(char value) {
         return (
                 Character.isDigit(value)
-                || this.isOperator(value)
-                || this.isDelimiter(value)
-                || this.isSpecial(value)
-                || this.isComment(value)
-                || value == '$'
-                || value == '@'
+                        || Character.isWhitespace(value)
+                        || this.isOperator(value)
+                        || this.isDelimiter(value)
+                        || this.isSpecial(value)
+                        || this.isComment(value)
+                        || value == '$'
+                        || value == '@'
         );
     }
 
@@ -28,13 +29,13 @@ public class TokenReader {
             source.advance();
         } while (Character.isDigit(source.getCurrentChar()));
 
-        if(source.getCurrentChar() == '.') {
+        if (source.getCurrentChar() == '.') {
 
             lexema.append(source.getCurrentChar());
             source.advance();
 
 
-            if(Character.isDigit(source.getCurrentChar())) {
+            if (Character.isDigit(source.getCurrentChar())) {
                 do {
                     lexema.append(source.getCurrentChar());
                     source.advance();
@@ -105,7 +106,7 @@ public class TokenReader {
 
             String stringValue = lexema.toString();
 
-            if(Long.parseLong(stringValue.substring(1)) != 0)
+            if (Long.parseLong(stringValue.substring(1)) != 0)
                 return new ResultIdentifierToken(currentLine, lexemeStart, stringValue);
             return new ErrorToken(currentLine, lexemeStart, stringValue);
         }
@@ -114,12 +115,12 @@ public class TokenReader {
     public boolean isOperator(char value) {
         return (
                 value == '='
-                || value == '+'
-                || value == '-'
-                || value == '*'
-                || value == '/'
-                || value == '%'
-                || value == '^'
+                        || value == '+'
+                        || value == '-'
+                        || value == '*'
+                        || value == '/'
+                        || value == '%'
+                        || value == '^'
         );
     }
 
@@ -136,17 +137,17 @@ public class TokenReader {
 
         String stringValue = lexema.toString();
 
-        if(stringValue.equals("="))
+        if (stringValue.equals("="))
             return new AtribToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue.equals("+"))
+        else if (stringValue.equals("+"))
             return new PlusToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue.equals("-"))
+        else if (stringValue.equals("-"))
             return new MinusToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue.equals("*"))
+        else if (stringValue.equals("*"))
             return new TimesToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue.equals("/"))
+        else if (stringValue.equals("/"))
             return new DivToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue.equals("%"))
+        else if (stringValue.equals("%"))
             return new ModToken(currentLine, lexemeStart, stringValue);
         else
             return new PowToken(currentLine, lexemeStart, stringValue);
@@ -169,10 +170,10 @@ public class TokenReader {
 
         String stringValue = lexema.toString();
 
-        if(stringValue.equals(","))
+        if (stringValue.equals(","))
             return new CommaToken(currentLine, lexemeStart, stringValue);
         else
-            return  new SemiToken(currentLine, lexemeStart, stringValue);
+            return new SemiToken(currentLine, lexemeStart, stringValue);
     }
 
     public boolean isDelimiter(char value) {
@@ -191,13 +192,13 @@ public class TokenReader {
 
         String stringValue = lexema.toString();
 
-        if(stringValue.equals("("))
+        if (stringValue.equals("("))
             return new LParenToken(currentLine, lexemeStart, stringValue);
         else
-            return  new RParenToken(currentLine, lexemeStart, stringValue);
+            return new RParenToken(currentLine, lexemeStart, stringValue);
     }
 
-    public  Token createWHITE(Source source) throws IOException {
+    public Token createWHITE(Source source) throws IOException {
         long currentLine = source.getCurrentLine();
         long lexemeStart = source.getCurrentColumn();
 

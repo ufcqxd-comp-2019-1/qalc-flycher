@@ -7,7 +7,6 @@ import br.ufc.comp.qalc.frontend.token.EOFToken;
 import br.ufc.comp.qalc.frontend.token.WhitespaceToken;
 import br.ufc.comp.qalc.report.MessageCenter;
 import br.ufc.comp.qalc.report.TokensReporter;
-import br.ufc.comp.qalc.report.messages.Message;
 import br.ufc.comp.qalc.report.messages.MessageCategory;
 import br.ufc.comp.qalc.report.messages.NewTokenMessage;
 import picocli.CommandLine;
@@ -118,18 +117,18 @@ public class QALC {
                                 new TokensReporter(outputToStream, qalc.outputVerbosity)
                         );
 
-                        Scanner scan = new Scanner( new Source(inputToStream) );
+                        Scanner scan = new Scanner(new Source(inputToStream));
                         NewTokenMessage token;
 
-                        while(true){
+                        while (true) {
                             token = new NewTokenMessage(scan.getNextToken());
 
-                            if(token.getToken() instanceof WhitespaceToken || token.getToken() instanceof CommentToken)
+                            if (token.getToken() instanceof WhitespaceToken || token.getToken() instanceof CommentToken)
                                 continue;
 
                             MessageCenter.deliver(token);
 
-                            if(token.getToken() instanceof EOFToken)
+                            if (token.getToken() instanceof EOFToken)
                                 break;
 
                         }

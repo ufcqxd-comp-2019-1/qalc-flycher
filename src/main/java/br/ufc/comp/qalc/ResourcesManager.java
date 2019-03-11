@@ -20,6 +20,7 @@ public class ResourcesManager {
 
     /**
      * Adicionar o recurso ao gerenciador na intenção de ser liberado de forma automatizada.
+     *
      * @param resource recurso a ser gerenciado.
      */
     public static void manage(Closeable resource) {
@@ -45,13 +46,13 @@ public class ResourcesManager {
     public static long shutdown(boolean printStackTrace) {
         long failed = 0;
 
-        for(Closeable resource : managedCloseables) {
+        for (Closeable resource : managedCloseables) {
             try {
                 resource.close();
             } catch (IOException e) {
                 ++failed;
 
-                if(printStackTrace) {
+                if (printStackTrace) {
                     e.printStackTrace();
                 }
             }

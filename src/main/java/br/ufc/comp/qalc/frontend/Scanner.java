@@ -1,6 +1,7 @@
 package br.ufc.comp.qalc.frontend;
 
-import br.ufc.comp.qalc.frontend.token.*;
+import br.ufc.comp.qalc.frontend.token.EOFToken;
+import br.ufc.comp.qalc.frontend.token.Token;
 
 import java.io.IOException;
 
@@ -51,43 +52,43 @@ public class Scanner {
 
         } else if (Character.isDigit(source.getCurrentChar())) { // NumberToken
 
-            return  reader.createNUML(source);
+            return reader.createNUML(source);
 
-        } else if(source.getCurrentChar() == '@') { // FunctionIdentifierToken
+        } else if (source.getCurrentChar() == '@') { // FunctionIdentifierToken
 
             return reader.createFUNCID(source);
 
-        } else if(source.getCurrentChar() == '$') { // VariableIdentifierToken or ResultIdentifierToken
+        } else if (source.getCurrentChar() == '$') { // VariableIdentifierToken or ResultIdentifierToken
 
             source.advance();
 
-            if(Character.isLetter(source.getCurrentChar())) { // VariableIdentifierToken
+            if (Character.isLetter(source.getCurrentChar())) { // VariableIdentifierToken
 
                 return reader.createVARID(source);
 
-            } else if(source.getCurrentChar() == '?' || Character.isDigit(source.getCurrentChar())){ // ResultIdentifierToken
+            } else if (source.getCurrentChar() == '?' || Character.isDigit(source.getCurrentChar())) { // ResultIdentifierToken
 
                 return reader.createRESID(source);
 
             }
 
-        } else if(reader.isOperator(source.getCurrentChar())) { // OperatorToken
+        } else if (reader.isOperator(source.getCurrentChar())) { // OperatorToken
 
             return reader.createOP(source);
 
-        } else if(reader.isSpecial(source.getCurrentChar())) { //  , ;
+        } else if (reader.isSpecial(source.getCurrentChar())) { //  , ;
 
             return reader.createSPECIAL(source);
 
-        } else if(reader.isDelimiter(source.getCurrentChar())) { //  ( )
+        } else if (reader.isDelimiter(source.getCurrentChar())) { //  ( )
 
             return reader.createDELIM(source);
 
-        } else if(Character.isWhitespace(source.getCurrentChar())) { // WhitespaceToken
+        } else if (Character.isWhitespace(source.getCurrentChar())) { // WhitespaceToken
 
             return reader.createWHITE(source);
 
-        } else if(reader.isComment(source.getCurrentChar())) { // CommentToken
+        } else if (reader.isComment(source.getCurrentChar())) { // CommentToken
 
             return reader.createCOMMENT(source);
 

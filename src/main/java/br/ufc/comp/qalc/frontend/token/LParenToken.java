@@ -23,6 +23,8 @@ public class LParenToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "LPAREN"; }
+    public String getTokenIdentifier() {
+        return "LPAREN";
+    }
 
 }

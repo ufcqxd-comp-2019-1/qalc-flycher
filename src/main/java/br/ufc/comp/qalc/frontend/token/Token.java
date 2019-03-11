@@ -68,7 +68,7 @@ public abstract class Token {
      * <p>
      * <strong>ATENÇÃO</strong>:
      * <ul>
-     *     <li><em>Deve retornar lexema, mesmo que este não esteja armazenado!</em></li>
+     * <li><em>Deve retornar lexema, mesmo que este não esteja armazenado!</em></li>
      * </ul>
      *
      * @return Lexema associado ao token.

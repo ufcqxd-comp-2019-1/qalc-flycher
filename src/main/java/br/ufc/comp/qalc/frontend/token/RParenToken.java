@@ -23,6 +23,8 @@ public class RParenToken extends Token {
     }
 
     @Override
-    public String getTokenIdentifier() { return "RPAREN"; }
+    public String getTokenIdentifier() {
+        return "RPAREN";
+    }
 
 }
