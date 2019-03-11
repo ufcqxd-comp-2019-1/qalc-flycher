@@ -1,6 +1,6 @@
-package br.ufc.comp.qalc.frontend.token;
+package br.ufc.comp.qalc.frontend;
 
-import br.ufc.comp.qalc.frontend.Source;
+import br.ufc.comp.qalc.frontend.token.*;
 
 import java.io.IOException;
 
@@ -8,12 +8,12 @@ public class TokenReader {
     public boolean validToken(char value) {
         return (
                 !Character.isDigit(value)
-                && this.isOperator(value)
-                && this.isDelimiter(value)
-                && this.isSpecial(value)
-                && !Character.isWhitespace(value)
-                && this.isComment(value)
-                );
+                        && this.isOperator(value)
+                        && this.isDelimiter(value)
+                        && this.isSpecial(value)
+                        && !Character.isWhitespace(value)
+                        && this.isComment(value)
+        );
     }
 
     public Token createNUML(Source source) throws IOException {
@@ -113,13 +113,13 @@ public class TokenReader {
     public boolean isOperator(char value) {
         return (
                 value == '='
-                || value == '+'
-                || value == '-'
-                || value == '*'
-                || value == '/'
-                || value == '%'
-                || value == '^'
-                );
+                        || value == '+'
+                        || value == '-'
+                        || value == '*'
+                        || value == '/'
+                        || value == '%'
+                        || value == '^'
+        );
     }
 
     public Token createOP(Source source) throws IOException {
