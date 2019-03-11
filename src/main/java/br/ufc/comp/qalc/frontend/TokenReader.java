@@ -114,12 +114,12 @@ public class TokenReader {
     public boolean isOperator(char value) {
         return (
                 value == '='
-                        || value == '+'
-                        || value == '-'
-                        || value == '*'
-                        || value == '/'
-                        || value == '%'
-                        || value == '^'
+                || value == '+'
+                || value == '-'
+                || value == '*'
+                || value == '/'
+                || value == '%'
+                || value == '^'
         );
     }
 
@@ -136,17 +136,17 @@ public class TokenReader {
 
         String stringValue = lexema.toString();
 
-        if(stringValue == "=")
+        if(stringValue.equals("="))
             return new AtribToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue == "+")
+        else if(stringValue.equals("+"))
             return new PlusToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue == "-")
+        else if(stringValue.equals("-"))
             return new MinusToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue == "*")
+        else if(stringValue.equals("*"))
             return new TimesToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue == "/")
+        else if(stringValue.equals("/"))
             return new DivToken(currentLine, lexemeStart, stringValue);
-        else if(stringValue == "%")
+        else if(stringValue.equals("%"))
             return new ModToken(currentLine, lexemeStart, stringValue);
         else
             return new PowToken(currentLine, lexemeStart, stringValue);
@@ -169,7 +169,7 @@ public class TokenReader {
 
         String stringValue = lexema.toString();
 
-        if(stringValue == ",")
+        if(stringValue.equals(","))
             return new CommaToken(currentLine, lexemeStart, stringValue);
         else
             return  new SemiToken(currentLine, lexemeStart, stringValue);
@@ -191,7 +191,7 @@ public class TokenReader {
 
         String stringValue = lexema.toString();
 
-        if(stringValue == "(")
+        if(stringValue.equals("("))
             return new LParenToken(currentLine, lexemeStart, stringValue);
         else
             return  new RParenToken(currentLine, lexemeStart, stringValue);
