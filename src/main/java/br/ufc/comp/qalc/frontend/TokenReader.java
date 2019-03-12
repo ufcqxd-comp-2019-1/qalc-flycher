@@ -19,92 +19,91 @@ public class TokenReader {
     }
 
     public Token createNUML(Source source) throws IOException {
-        StringBuilder lexema = new StringBuilder();
+        StringBuilder lexeme = new StringBuilder();
 
         long currentLine = source.getCurrentLine();
         long lexemeStart = source.getCurrentColumn();
 
         do {
-            lexema.append(source.getCurrentChar());
+            lexeme.append(source.getCurrentChar());
             source.advance();
         } while (Character.isDigit(source.getCurrentChar()));
 
         if (source.getCurrentChar() == '.') {
 
-            lexema.append(source.getCurrentChar());
+            lexeme.append(source.getCurrentChar());
             source.advance();
-
 
             if (Character.isDigit(source.getCurrentChar())) {
                 do {
-                    lexema.append(source.getCurrentChar());
+                    lexeme.append(source.getCurrentChar());
                     source.advance();
                 } while (Character.isDigit(source.getCurrentChar()));
             }
         }
 
-        String stringValue = lexema.toString();
+        String stringValue = lexeme.toString();
 
         return new NumberToken(currentLine, lexemeStart, stringValue);
     }
 
     public Token createFUNCID(Source source) throws IOException {
-        StringBuilder lexema = new StringBuilder();
+        StringBuilder lexeme = new StringBuilder();
 
         long currentLine = source.getCurrentLine();
         long lexemeStart = source.getCurrentColumn();
 
         do {
-            lexema.append(source.getCurrentChar());
+            lexeme.append(source.getCurrentChar());
             source.advance();
         } while (Character.isDigit(source.getCurrentChar()) || Character.isLetter(source.getCurrentChar()));
 
-        String stringValue = lexema.toString();
+        String stringValue = lexeme.toString();
 
         return new FunctionIdentifierToken(currentLine, lexemeStart, stringValue);
     }
 
     public Token createVARID(Source source) throws IOException {
-        StringBuilder lexema = new StringBuilder();
+        StringBuilder lexeme = new StringBuilder();
 
         long currentLine = source.getCurrentLine();
         long lexemeStart = source.getCurrentColumn();
 
-        lexema.append('$');
+        lexeme.append('$');
 
         do {
-            lexema.append(source.getCurrentChar());
+            lexeme.append(source.getCurrentChar());
             source.advance();
         } while (Character.isLetter(source.getCurrentChar()));
 
-        String stringValue = lexema.toString();
+        String stringValue = lexeme.toString();
 
         return new VariableIdentifierToken(currentLine, lexemeStart, stringValue);
     }
 
     public Token createRESID(Source source) throws IOException {
-        StringBuilder lexema = new StringBuilder();
+        StringBuilder lexeme = new StringBuilder();
 
         long currentLine = source.getCurrentLine();
         long lexemeStart = source.getCurrentColumn();
 
-        lexema.append('$');
+        lexeme.append('$');
 
         if (source.getCurrentChar() == '?') { // ResultIdentifierToken
-            lexema.append('?');
+            lexeme.append('?');
             source.advance();
 
-            String stringValue = lexema.toString();
+            String stringValue = lexeme.toString();
 
             return new ResultIdentifierToken(currentLine, lexemeStart, stringValue);
 
         } else { // ResultIdentifierToken
             do {
-                lexema.append(source.getCurrentChar());
+                lexeme.append(source.getCurrentChar());
                 source.advance();
             } while (Character.isDigit(source.getCurrentChar()));
 
-            String stringValue = lexema.toString();
+            String stringValue = lexeme.toString();
 
             if (Long.parseLong(stringValue.substring(1)) != 0)
                 return new ResultIdentifierToken(currentLine, lexemeStart, stringValue);
@@ -124,33 +123,48 @@ public class TokenReader {
         );
     }
 
+    private class SingleLexeme {
+        private StringBuilder lexeme;
+        private String stringValue;
+        private long currentLine;
+        private long lexemeStart;
+
+        public SingleLexeme(Source source) throws IOException {
+            lexeme = new StringBuilder();
+
+            currentLine = source.getCurrentLine();
+            lexemeStart = source.getCurrentColumn();
+
+            lexeme.append(source.getCurrentChar());
+
+            source.advance();
+
+            stringValue = lexeme.toString();
+        }
+
+        public long getCurrentLine() { return currentLine; }
+        public long getLexemeStart() { return lexemeStart; }
+        public String getStringValue() { return stringValue; }
+    }
+
     public Token createOP(Source source) throws IOException {
 
-        StringBuilder lexema = new StringBuilder();
+        SingleLexeme lexeme = new SingleLexeme(source);
 
-        long currentLine = source.getCurrentLine();
-        long lexemeStart = source.getCurrentColumn();
-
-        lexema.append(source.getCurrentChar());
-
-        source.advance();
-
-        String stringValue = lexema.toString();
-
-        if (stringValue.equals("="))
-            return new AtribToken(currentLine, lexemeStart, stringValue);
-        else if (stringValue.equals("+"))
-            return new PlusToken(currentLine, lexemeStart, stringValue);
-        else if (stringValue.equals("-"))
-            return new MinusToken(currentLine, lexemeStart, stringValue);
-        else if (stringValue.equals("*"))
-            return new TimesToken(currentLine, lexemeStart, stringValue);
-        else if (stringValue.equals("/"))
-            return new DivToken(currentLine, lexemeStart, stringValue);
-        else if (stringValue.equals("%"))
-            return new ModToken(currentLine, lexemeStart, stringValue);
+        if (lexeme.getStringValue().equals("="))
+            return new AtribToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
+        else if (lexeme.getStringValue().equals("+"))
+            return new PlusToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
+        else if (lexeme.getStringValue().equals("-"))
+            return new MinusToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
+        else if (lexeme.getStringValue().equals("*"))
+            return new TimesToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
+        else if (lexeme.getStringValue().equals("/"))
+            return new DivToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
+        else if (lexeme.getStringValue().equals("%"))
+            return new ModToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
         else
-            return new PowToken(currentLine, lexemeStart, stringValue);
+            return new PowToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
     }
 
     public boolean isSpecial(char value) {
@@ -159,21 +173,12 @@ public class TokenReader {
 
     public Token createSPECIAL(Source source) throws IOException {
 
-        StringBuilder lexema = new StringBuilder();
+        SingleLexeme lexeme = new SingleLexeme(source);
 
-        long currentLine = source.getCurrentLine();
-        long lexemeStart = source.getCurrentColumn();
-
-        lexema.append(source.getCurrentChar());
-
-        source.advance();
-
-        String stringValue = lexema.toString();
-
-        if (stringValue.equals(","))
-            return new CommaToken(currentLine, lexemeStart, stringValue);
+        if (lexeme.getStringValue().equals(","))
+            return new CommaToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
         else
-            return new SemiToken(currentLine, lexemeStart, stringValue);
+            return new SemiToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
     }
 
     public boolean isDelimiter(char value) {
@@ -181,21 +186,13 @@ public class TokenReader {
     }
 
     public Token createDELIM(Source source) throws IOException {
-        StringBuilder lexema = new StringBuilder();
 
-        long currentLine = source.getCurrentLine();
-        long lexemeStart = source.getCurrentColumn();
+        SingleLexeme lexeme = new SingleLexeme(source);
 
-        lexema.append(source.getCurrentChar());
-
-        source.advance();
-
-        String stringValue = lexema.toString();
-
-        if (stringValue.equals("("))
-            return new LParenToken(currentLine, lexemeStart, stringValue);
+        if (lexeme.getStringValue().equals("("))
+            return new LParenToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
         else
-            return new RParenToken(currentLine, lexemeStart, stringValue);
+            return new RParenToken(lexeme.getCurrentLine(), lexeme.getLexemeStart(), lexeme.getStringValue());
     }
 
     public Token createWHITE(Source source) throws IOException {
@@ -214,33 +211,33 @@ public class TokenReader {
     }
 
     public Token createCOMMENT(Source source) throws IOException {
-        StringBuilder lexema = new StringBuilder();
+        StringBuilder lexeme = new StringBuilder();
 
         long currentLine = source.getCurrentLine();
         long lexemeStart = source.getCurrentColumn();
 
         do {
-            lexema.append(source.getCurrentChar());
+            lexeme.append(source.getCurrentChar());
             source.advance();
         } while (source.getCurrentChar() != '\n' && source.getCurrentChar() != '\r' && source.getCurrentChar() != '\0');
 
-        String stringValue = lexema.toString();
+        String stringValue = lexeme.toString();
 
         return new CommentToken(currentLine, lexemeStart, stringValue);
     }
 
     public Token createERROR(Source source) throws IOException {
-        StringBuilder lexema = new StringBuilder();
+        StringBuilder lexeme = new StringBuilder();
 
         long currentLine = source.getCurrentLine();
         long lexemeStart = source.getCurrentColumn();
 
         do {
-            lexema.append(source.getCurrentChar());
+            lexeme.append(source.getCurrentChar());
             source.advance();
         } while (!this.validToken(source.getCurrentChar()));
 
-        String stringValue = lexema.toString();
+        String stringValue = lexeme.toString();
 
         return new ErrorToken(currentLine, lexemeStart, stringValue);
     }

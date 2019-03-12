@@ -43,7 +43,6 @@ public class Scanner {
      * @throws IOException Caso haja problema na leitura da fonte.
      */
     public Token getNextToken() throws IOException {
-        // TODO Reconhecimento de tokens
         TokenReader reader = new TokenReader();
 
         if (source.getCurrentChar() == Source.EOF) { // EOF
@@ -95,9 +94,8 @@ public class Scanner {
         } else { // Nao combina com nenhum token.
 
             return reader.createERROR(source);
-        }
-        // TODO Recuperação de erros.
 
+        }
         return null;
     }
 

@@ -2,5 +2,5 @@
 $x = @sqrt(2);
 #comentario
 $y = @log(1024, 2);
-a
+abc = 0001. + 2
 #comentario

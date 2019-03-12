@@ -65,7 +65,6 @@ public class TokensReporter extends BasicReporter {
                             ((NewTokenMessage) message).getToken().getColumnStart(),
                             ((NewTokenMessage) message).getToken().getColumnEnd()));
                 }
-                //TODO como pegar o lexema.
             } catch (IOException e) {
                 reportFailure(e);
             }
