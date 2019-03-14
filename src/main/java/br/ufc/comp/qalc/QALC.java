@@ -117,21 +117,6 @@ public class QALC {
                                 new TokensReporter(outputToStream, qalc.outputVerbosity)
                         );
 
-                        Scanner scan = new Scanner(new Source(inputToStream));
-                        NewTokenMessage token;
-
-                        while (true) {
-                            token = new NewTokenMessage(scan.getNextToken());
-
-                            if (token.getToken() instanceof WhitespaceToken || token.getToken() instanceof CommentToken)
-                                continue;
-
-                            MessageCenter.deliver(token);
-
-                            if (token.getToken() instanceof EOFToken)
-                                break;
-
-                        }
                         break;
                     case PARSER:
                         // TODO
@@ -151,7 +136,22 @@ public class QALC {
                 //       está antes da fase em que o usuário deseja parar.
                 if (qalc.stopAt.ordinal() >= InterpreterPass.LEXER.ordinal()) {
                     // Fase de Análise Léxica deve ser executada
-                    // TODO Executar análise léxica
+                    
+                    Scanner scan = new Scanner(new Source(inputToStream));
+                    NewTokenMessage token;
+
+                    while (true) {
+                        token = new NewTokenMessage(scan.getNextToken());
+
+                        if (token.getToken() instanceof WhitespaceToken || token.getToken() instanceof CommentToken)
+                            continue;
+
+                        MessageCenter.deliver(token);
+
+                        if (token.getToken() instanceof EOFToken)
+                            break;
+
+                    }
                 }
                 // TODO Verificar e executar demais fases
 

@@ -16,13 +16,6 @@ import java.util.List;
  */
 public final class MessageCenter {
     /**
-     * Construtor privado para impedir que um objeto desta classe
-     * seja instanciado.
-     */
-    private MessageCenter() {
-    }
-
-    /**
      * Armazena todos os consumidores registrados, categorizados pelo
      * tipo de mensagem que eles alegam poder processar.
      */
@@ -30,6 +23,13 @@ public final class MessageCenter {
 
     static {
         mapping = new HashMap<>();
+    }
+
+    /**
+     * Construtor privado para impedir que um objeto desta classe
+     * seja instanciado.
+     */
+    private MessageCenter() {
     }
 
     /**

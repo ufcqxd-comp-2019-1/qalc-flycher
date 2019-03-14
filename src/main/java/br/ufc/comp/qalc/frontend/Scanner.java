@@ -59,17 +59,7 @@ public class Scanner {
 
         } else if (source.getCurrentChar() == '$') { // VariableIdentifierToken or ResultIdentifierToken
 
-            source.advance();
-
-            if (Character.isLetter(source.getCurrentChar())) { // VariableIdentifierToken
-
-                return reader.createVARID(source);
-
-            } else if (source.getCurrentChar() == '?' || Character.isDigit(source.getCurrentChar())) { // ResultIdentifierToken
-
-                return reader.createRESID(source);
-
-            }
+            return reader.createVARIDorRESID(source);
 
         } else if (reader.isOperator(source.getCurrentChar())) { // OperatorToken
 
@@ -96,7 +86,6 @@ public class Scanner {
             return reader.createERROR(source);
 
         }
-        return null;
     }
 
     /**
