@@ -60,7 +60,11 @@ public final class MessageCenter {
     public static void deliver(Message message) {
         List<MessageConsumer> list = mapping.get(message.getCategory());
 
+<<<<<<< HEAD
         if (list != null) {
+=======
+        if(list != null) {
+>>>>>>> 666ab46c7efa5fc159d7ad9a605dd72fcabe333f
             for (MessageConsumer consumer : list) {
                 consumer.consume(message);
             }

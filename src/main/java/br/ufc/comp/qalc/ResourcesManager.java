@@ -20,7 +20,10 @@ public class ResourcesManager {
 
     /**
      * Adicionar o recurso ao gerenciador na intenção de ser liberado de forma automatizada.
+<<<<<<< HEAD
      *
+=======
+>>>>>>> 666ab46c7efa5fc159d7ad9a605dd72fcabe333f
      * @param resource recurso a ser gerenciado.
      */
     public static void manage(Closeable resource) {
@@ -46,13 +49,21 @@ public class ResourcesManager {
     public static long shutdown(boolean printStackTrace) {
         long failed = 0;
 
+<<<<<<< HEAD
         for (Closeable resource : managedCloseables) {
+=======
+        for(Closeable resource : managedCloseables) {
+>>>>>>> 666ab46c7efa5fc159d7ad9a605dd72fcabe333f
             try {
                 resource.close();
             } catch (IOException e) {
                 ++failed;
 
+<<<<<<< HEAD
                 if (printStackTrace) {
+=======
+                if(printStackTrace) {
+>>>>>>> 666ab46c7efa5fc159d7ad9a605dd72fcabe333f
                     e.printStackTrace();
                 }
             }
@@ -60,4 +71,8 @@ public class ResourcesManager {
 
         return failed;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 666ab46c7efa5fc159d7ad9a605dd72fcabe333f

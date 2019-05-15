@@ -81,4 +81,8 @@ public class OutputFormatter {
                 .replaceAll("\\R", "\u21B5")
                 .replaceAll("\\t", "\u21E5");
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 666ab46c7efa5fc159d7ad9a605dd72fcabe333f
